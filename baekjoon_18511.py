@@ -1,20 +1,20 @@
-from collections import Counter
+from itertools import product
 import sys
-N = sys.stdin.readline().strip()
+N, nk = list(map(int,sys.stdin.readline().strip().split(" ")))
+K = sys.stdin.readline().strip().split(" ")
 
-Word_list = list(map(list,Counter(N).items()))
+L = len(str(N))
 
-odds = [w for w in Word_list if w[1] %2 == 1]
-evens =[w for w in Word_list if w[1] %2 == 0]
-if odds and odds[0][1] > 1:
-    odds[0][1] -= 1
-    evens.append(odds[0])
-evens = sorted(evens)
-if len(odds) > 1 :
-    print("I'm Sorry Hansoo")
-else :
-    W = "".join(list(map(lambda x: x[0] * (x[1] // 2), evens)))
-    if odds :
-        print(W+odds[0][0]+W[::-1])
+while True :
+    ans = ""
+    N_list = sorted(list(map(lambda x : "".join(list(x)),product(K,repeat=L))),key = lambda x : int(x))
+    while N_list :
+        n = N_list.pop()
+        if int(n) <= N :
+            ans = n
+            break;
+    if ans == "":
+        L -=1
     else :
-        print(W+W[::-1])
+        break;
+print(ans)
