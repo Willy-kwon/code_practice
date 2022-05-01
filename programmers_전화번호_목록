@@ -1,0 +1,33 @@
+#def solution(phone_book):
+#    hash_map = {i : [] for i in range(1,21)}
+#    answer = True
+#    phone_book = sorted(phone_book,key =lambda x : (x,len(x)),reverse=True)
+#    while phone_book:
+#        p = phone_book.pop();
+#        if phone_book:
+#            p2 = phone_book.pop();
+#        else :
+#            break;
+#        if p2.find(p) == 0:
+#            answer = False;
+#        else :
+#            phone_book.append(p2)
+#    return answer
+def solution(phone_book) :
+    answer = True;
+    hash_table = {i : {} for i in range(1,21)}
+    
+    for p in phone_book :
+        hash_table[len(p)][p]=1;
+    for p in phone_book :
+        l = len(p);
+        swt = False;
+        for j in range(l-1,0,-1) :
+            cur = p[0:j];
+            if cur in hash_table[j].keys() :
+                answer = False;
+                swt=True;
+                break;
+        if swt :
+            break;
+    return answer
