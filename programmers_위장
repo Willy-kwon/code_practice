@@ -1,0 +1,15 @@
+from itertools import combinations
+def solution(clothes):
+    answer = 0
+    dict1 = {}
+    for cloth in clothes :
+        if cloth[1] not in dict1.keys() :
+            dict1[cloth[1]] = []
+        dict1[cloth[1]].append(cloth[0])
+    N = list(dict1.keys())
+    V = 1
+    v1 = [len(dict1[n]) + 1 for n in N]
+    for v in v1 :
+        V *=v
+    answer = V-1
+    return answer
